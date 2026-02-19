@@ -13,7 +13,7 @@ CREATE TABLE solution_package (
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   deleted_at DATETIME NULL,
   INDEX idx_solution_package_scene_status (scene, status)
-);
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE sku (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -34,7 +34,7 @@ CREATE TABLE sku (
   deleted_at DATETIME NULL,
   INDEX idx_sku_category_active (category, is_active),
   INDEX idx_sku_stock_status (stock_status)
-);
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE solution_package_item (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -52,7 +52,7 @@ CREATE TABLE solution_package_item (
   UNIQUE KEY uniq_package_sku (package_id, sku_id),
   INDEX idx_package_sort (package_id, sort_order),
   INDEX idx_package_item_sku (sku_id)
-);
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE inquiry (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -71,4 +71,4 @@ CREATE TABLE inquiry (
   FOREIGN KEY (package_id) REFERENCES solution_package(id),
   INDEX idx_inquiry_status_created (status, created_at),
   INDEX idx_inquiry_package (package_id)
-);
+) DEFAULT CHARSET=utf8mb4;

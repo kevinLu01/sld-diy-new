@@ -25,6 +25,7 @@
         <span class="hint">点击套用后自动带入配置</span>
       </div>
       <p v-if="loadError" class="error">{{ loadError }}</p>
+      <p v-else-if="!packages.length" class="hint">暂无方案包，请检查 /api/packages 是否可用</p>
       <div class="plans">
         <div
           v-for="pkg in filteredPackages"

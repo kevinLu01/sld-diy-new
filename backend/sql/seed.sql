@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 INSERT INTO solution_package (id, name, scene, status, version, default_price_cents, summary)
 VALUES
   (1, '标准冷库方案', '冷库', 'published', 1, 2648000, '适用 50-80 平方'),
