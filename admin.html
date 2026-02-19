@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生利达冷冻设备｜方案后台管理台</title>
+  <style>
+    :root {
+      --bg: #f5f8fc;
+      --card: #fff;
+      --line: #d9e4f3;
+      --text: #1d2d45;
+      --sub: #5e7190;
+      --brand: #0a7cff;
+      --ok: #1f9d57;
+      --warn: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0f1f37;
+      color: #bfd2ee;
+      padding: 16px 14px;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .menu {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .menu div {
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: default;
+    }
+
+    .menu .active {
+      background: #1b3358;
+      color: #fff;
+    }
+
+    .content {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .btn {
+      border: none;
+      background: var(--brand);
+      color: #fff;
+      font-size: 12px;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .label {
+      font-size: 12px;
+      color: var(--sub);
+    }
+
+    .value {
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 6px;
+      border-bottom: 1px solid #e8eef7;
+    }
+
+    th { color: var(--sub); font-weight: 600; }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ecf4ff;
+      color: #245184;
+      white-space: nowrap;
+    }
+
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .list-item {
+      padding: 9px;
+      border: 1px dashed #cfe0f6;
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">生利达 · 后台管理</div>
+      <div class="menu">
+        <div class="active">方案包管理</div>
+        <div>SKU组件库</div>
+        <div>价格与毛利策略</div>
+        <div>兼容规则引擎</div>
+        <div>询价与订单池</div>
+        <div>安装服务排期</div>
+        <div>内容配置（移动端）</div>
+        <div>账号与权限</div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="topbar">
+        <div>
+          <strong>方案包管理总览</strong>
+          <div class="label">面向移动端「一键套用」方案的配置中台</div>
+        </div>
+        <button class="btn">新建方案包</button>
+      </section>
+
+      <section class="cards">
+        <article class="card">
+          <div class="label">上线方案包</div>
+          <div class="value">12</div>
+        </article>
+        <article class="card">
+          <div class="label">今日询价转化</div>
+          <div class="value">34.8%</div>
+        </article>
+        <article class="card">
+          <div class="label">低毛利预警</div>
+          <div class="value warn">3</div>
+        </article>
+        <article class="card">
+          <div class="label">兼容校验异常</div>
+          <div class="value ok">0</div>
+        </article>
+      </section>
+
+      <section class="grid-2">
+        <article class="card">
+          <h3 style="margin:0 0 8px; font-size:15px;">A. 方案包配置（核心）</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>方案名称</th>
+                <th>适用场景</th>
+                <th>版本</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>冷库标准版 20~30㎡</td>
+                <td><span class="tag">便利店后仓</span></td>
+                <td>v1.6</td>
+                <td class="ok">已发布</td>
+              </tr>
+              <tr>
+                <td>商超节能版 40~60㎡</td>
+                <td><span class="tag">商超保鲜</span></td>
+                <td>v2.1</td>
+                <td class="ok">已发布</td>
+              </tr>
+              <tr>
+                <td>医药冷链高配版</td>
+                <td><span class="tag">冷链仓</span></td>
+                <td>v1.2</td>
+                <td class="warn">待审批</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="card">
+          <h3 style="margin:0 0 8px; font-size:15px;">B. 后台能力建议（对应你的商城）</h3>
+          <div class="list">
+            <div class="list-item"><strong>1) 方案包管理：</strong>组合 SKU、适用面积、价格区间、默认辅材与安装服务模板。</div>
+            <div class="list-item"><strong>2) SKU组件库：</strong>压缩机/冷风机/阀件/电控/安装服务统一维护，支持上下架。</div>
+            <div class="list-item"><strong>3) 规则引擎：</strong>按温区、电源、制冷剂、面积做兼容校验并给替代推荐。</div>
+            <div class="list-item"><strong>4) 价格策略：</strong>地区系数、铜管长度阶梯价、毛利红线、促销模板。</div>
+            <div class="list-item"><strong>5) 询价订单池：</strong>线索分配销售、跟进状态、报价版本、转单统计。</div>
+            <div class="list-item"><strong>6) 内容配置：</strong>移动端首页 banner、推荐文案、热销标签可视化配置。</div>
+            <div class="list-item"><strong>7) 权限与审计：</strong>运营/销售/技术/财务分权，方案与价格变更留痕。</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生利达冷冻设备｜DIY商城（移动端）</title>
+  <style>
+    :root {
+      --brand: #0a7cff;
+      --brand-dark: #045fc7;
+      --bg: #f3f7fb;
+      --card: #ffffff;
+      --text: #16253d;
+      --sub: #5c6f8d;
+      --ok: #1f9d57;
+      --warn: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(22, 37, 61, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #e9f3ff 0%, #f6faff 130px, var(--bg) 260px);
+      padding-bottom: 88px;
+      position: relative;
+    }
+
+    .header { padding: 18px 16px 12px; }
+
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand h1 { margin: 0; font-size: 18px; }
+
+    .badge {
+      background: #eaf3ff;
+      color: var(--brand-dark);
+      border: 1px solid #c7ddff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      margin-top: 14px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .hero-title { margin: 0 0 8px; font-size: 17px; line-height: 1.3; }
+
+    .hero p { margin: 0; color: var(--sub); font-size: 13px; }
+
+    .quick-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .quick-item {
+      background: #f4f9ff;
+      border-radius: 12px;
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 12px;
+      color: #38557f;
+    }
+
+    .section { margin: 14px 16px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .section h2 { margin: 0; font-size: 16px; }
+
+    .hint { font-size: 12px; color: var(--sub); }
+
+    .plans {
+      display: grid;
+      gap: 10px;
+    }
+
+    .plan-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      border: 1px solid transparent;
+    }
+
+    .plan-card.active {
+      border-color: #9cc6ff;
+      background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+    }
+
+    .plan-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .plan-top h3 { margin: 0; font-size: 14px; }
+
+    .plan-level {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #ecf5ff;
+      color: #245184;
+      white-space: nowrap;
+    }
+
+    .plan-desc { margin: 8px 0; color: var(--sub); font-size: 12px; }
+
+    .plan-points {
+      margin: 0;
+      padding-left: 18px;
+      color: #415d84;
+      font-size: 12px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .plan-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .plan-price { font-size: 16px; font-weight: 700; color: var(--brand-dark); }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 12px;
+      padding: 7px 11px;
+      cursor: pointer;
+    }
+
+    .btn-lite {
+      border: 1px solid #cfe2ff;
+      background: #fff;
+      color: #21508a;
+      border-radius: 10px;
+      font-size: 12px;
+      padding: 7px 11px;
+      cursor: pointer;
+    }
+
+    .type-tabs {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab {
+      border: 1px solid #d0e3ff;
+      background: #fff;
+      color: #29517f;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .tab.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+    .products {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card h3 { margin: 0; font-size: 14px; line-height: 1.35; }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #355989;
+      white-space: nowrap;
+    }
+
+    .specs {
+      margin: 8px 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spec {
+      font-size: 11px;
+      color: #466189;
+      background: #f5f8ff;
+      border: 1px solid #e0ebff;
+      border-radius: 8px;
+      padding: 2px 8px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price { font-weight: 700; color: var(--brand-dark); font-size: 16px; }
+
+    .builder { margin-top: 12px; display: grid; gap: 8px; }
+
+    .builder-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      background: #f7fbff;
+      border: 1px solid #e2efff;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .builder-row strong { display: block; font-size: 13px; }
+    .builder-row span { font-size: 11px; color: var(--sub); }
+
+    .status {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+
+    .ok { background: #e8f9ef; color: var(--ok); }
+    .warn { background: #fff6e7; color: #a86b00; }
+
+    .selected-plan {
+      background: #f3f8ff;
+      border: 1px dashed #aacdff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #36577f;
+    }
+
+    .total {
+      margin-top: 8px;
+      background: #0c1a2f;
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total small { color: #9eb4d3; }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: min(430px, 100%);
+      background: #fff;
+      border-top: 1px solid #dbe7f8;
+      padding: 10px 14px 14px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+      font-size: 11px;
+      color: #5f7497;
+    }
+
+    .bottom-nav .active { color: var(--brand); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="brand">
+        <h1>生利达冷冻设备 · DIY商城</h1>
+        <span class="badge">移动端优先</span>
+      </div>
+
+      <section class="hero">
+        <h2 class="hero-title">为冷库、商超、餐饮场景快速拼装空调冷冻方案</h2>
+        <p>支持按制冷量、能效等级、环境温度、安装空间进行选型，提供整机+辅材一站式下单。</p>
+        <div class="quick-grid">
+          <div class="quick-item">📦 整机组合</div>
+          <div class="quick-item">🧰 辅材配件</div>
+          <div class="quick-item">🚚 送装一体</div>
+        </div>
+      </section>
+    </header>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>1) 一键推荐方案包</h2>
+        <span class="hint">不懂选型？直接套用整套方案</span>
+      </div>
+      <div class="plans" id="planList">
+        <article class="plan-card active" data-plan="冷库标准版" data-price="26480">
+          <div class="plan-top">
+            <h3>冷库标准版（20~30㎡）</h3>
+            <span class="plan-level">入门型</span>
+          </div>
+          <p class="plan-desc">适合便利店后仓、小型食材冷藏，强调稳定与性价比。</p>
+          <ul class="plan-points">
+            <li>SLD-LK35 压缩机组 + 吊顶冷风机</li>
+            <li>基础铜管包 15m + 标准控制箱</li>
+            <li>上门安装调试 + 首年巡检</li>
+          </ul>
+          <div class="plan-footer">
+            <div class="plan-price">¥26,480</div>
+            <button class="btn apply-plan">一键套用</button>
+          </div>
+        </article>
+
+        <article class="plan-card" data-plan="商超节能版" data-price="32800">
+          <div class="plan-top">
+            <h3>商超节能版（40~60㎡）</h3>
+            <span class="plan-level">热销型</span>
+          </div>
+          <p class="plan-desc">针对商超陈列和频繁开门，优先控制电耗和温度波动。</p>
+          <ul class="plan-points">
+            <li>SLD-SY28 双机并联 + 智能化霜</li>
+            <li>高效换热冷风机 + 防潮阀件包</li>
+            <li>远程监控模块 + 安装调试</li>
+          </ul>
+          <div class="plan-footer">
+            <div class="plan-price">¥32,800</div>
+            <button class="btn apply-plan">一键套用</button>
+          </div>
+        </article>
+
+        <article class="plan-card" data-plan="冷链高配版" data-price="46900">
+          <div class="plan-top">
+            <h3>冷链高配版（医药/生鲜）</h3>
+            <span class="plan-level">旗舰型</span>
+          </div>
+          <p class="plan-desc">强调温控精度和连续运行稳定性，适合高标准冷链项目。</p>
+          <ul class="plan-points">
+            <li>双回路机组 + 备用电控保护</li>
+            <li>数据记录仪 + 超温告警联动</li>
+            <li>18个月核心质保 + 快速维保</li>
+          </ul>
+          <div class="plan-footer">
+            <div class="plan-price">¥46,900</div>
+            <button class="btn apply-plan">一键套用</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>2) 细化场景（可选）</h2>
+        <span class="hint">套用方案后还能继续DIY微调</span>
+      </div>
+      <div class="type-tabs">
+        <button class="tab active">冷库工程</button>
+        <button class="tab">商用中央空调</button>
+        <button class="tab">食品加工车间</button>
+        <button class="tab">医药冷链</button>
+      </div>
+
+      <div class="products">
+        <article class="card">
+          <div class="card-top">
+            <h3>SLD-LK35 低温冷库机组</h3>
+            <span class="tag">推荐</span>
+          </div>
+          <div class="specs">
+            <span class="spec">35kW 制冷量</span>
+            <span class="spec">-25℃低温</span>
+            <span class="spec">R404A</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">¥18,900</div>
+            <button class="btn-lite">加入DIY方案</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-head" style="margin-bottom: 8px;">
+        <h2>3) DIY配置清单</h2>
+        <span class="hint">自动校验兼容性</span>
+      </div>
+
+      <div class="selected-plan" id="selectedPlan">当前已套用：冷库标准版（20~30㎡）</div>
+
+      <div class="builder">
+        <div class="builder-row">
+          <div>
+            <strong>压缩机组</strong>
+            <span>SLD-LK35 · 380V · 三相</span>
+          </div>
+          <span class="status ok">兼容</span>
+        </div>
+        <div class="builder-row">
+          <div>
+            <strong>冷风机</strong>
+            <span>风量 12000m³/h · 吊顶式</span>
+          </div>
+          <span class="status ok">兼容</span>
+        </div>
+        <div class="builder-row">
+          <div>
+            <strong>膨胀阀 + 干燥过滤器</strong>
+            <span>建议升级防潮版（沿海项目）</span>
+          </div>
+          <span class="status warn">建议</span>
+        </div>
+        <div class="builder-row">
+          <div>
+            <strong>安装服务</strong>
+            <span>含铜管焊接 / 抽真空 / 调试</span>
+          </div>
+          <span class="status ok">已选</span>
+        </div>
+      </div>
+
+      <div class="total">
+        <div>
+          <small>预估总价（含税）</small>
+          <div id="totalPrice" style="font-size: 19px; font-weight: 700;">¥26,480</div>
+        </div>
+        <button class="btn" style="padding: 9px 14px;">提交询价</button>
+      </div>
+    </section>
+
+    <section class="section card" style="margin-bottom: 16px;">
+      <div class="section-head" style="margin-bottom: 6px;">
+        <h2>4) 生利达服务保障</h2>
+      </div>
+      <p style="margin:0; color: var(--sub); font-size:13px;">
+        7×12 小时技术支持、全国安装协同、核心部件质保 18 个月。
+        支持项目资料归档（竣工图、调试记录、维保手册）在线下载。
+      </p>
+    </section>
+  </main>
+
+  <div style="margin: 0 16px; font-size: 12px; color: #5c6f8d;">后台管理原型：<a href="admin.html" style="color:#0a7cff;">admin.html</a></div>
+
+  <nav class="bottom-nav">
+    <div class="active">首页</div>
+    <div>方案包</div>
+    <div>订单</div>
+    <div>我的</div>
+  </nav>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    const planCards = document.querySelectorAll('.plan-card');
+    const selectedPlan = document.getElementById('selectedPlan');
+    const totalPrice = document.getElementById('totalPrice');
+
+    planCards.forEach(card => {
+      card.querySelector('.apply-plan').addEventListener('click', () => {
+        planCards.forEach(item => item.classList.remove('active'));
+        card.classList.add('active');
+
+        const planName = card.dataset.plan;
+        const price = Number(card.dataset.price || 0).toLocaleString('zh-CN');
+
+        selectedPlan.textContent = `当前已套用：${planName}`;
+        totalPrice.textContent = `¥${price}`;
+      });
+    });
+  </script>
+</body>
+</html>

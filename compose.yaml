@@ -1,0 +1,59 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: sld-diy-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: sld_diy
+      MYSQL_USER: sld
+      MYSQL_PASSWORD: sld
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/sql/ddl_core.sql:/docker-entrypoint-initdb.d/ddl_core.sql:ro
+      - ./backend/sql/seed.sql:/docker-entrypoint-initdb.d/seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    container_name: sld-diy-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    container_name: sld-diy-backend
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/sld_diy?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: sld
+      SPRING_DATASOURCE_PASSWORD: sld
+      SERVER_PORT: 8081
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8081:8081"
+
+  frontend:
+    build: ./frontend
+    container_name: sld-diy-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_BASE: /api
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
