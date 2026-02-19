@@ -64,6 +64,7 @@
           {{ scene }}
         </button>
       </div>
+      <p class="hint">当前筛选：{{ selectedScene }}</p>
     </section>
 
     <section class="section">
@@ -155,10 +156,14 @@
     </div>
 
     <nav class="bottom-nav">
-      <div class="active">首页</div>
-      <div>方案包</div>
-      <div>订单</div>
-      <div>我的</div>
+      <button
+        v-for="item in navItems"
+        :key="item"
+        :class="{ active: activeNav === item }"
+        @click="selectNav(item)"
+      >
+        {{ item }}
+      </button>
     </nav>
   </main>
 </template>
@@ -214,6 +219,8 @@ const submitting = ref(false);
 const submitMessage = ref('');
 const rulesResult = ref<RulesResponse | null>(null);
 const loadError = ref('');
+const navItems = ['首页', '方案包', '订单', '我的'];
+const activeNav = ref('首页');
 
 const form = reactive({
   customerName: '',
@@ -296,6 +303,10 @@ const changeQty = async (skuId: number, delta: number) => {
 
 const selectScene = (scene: string) => {
   selectedScene.value = scene;
+};
+
+const selectNav = (item: string) => {
+  activeNav.value = item;
 };
 
 const submitInquiry = async () => {
@@ -708,9 +719,14 @@ input {
   color: #6b7c95;
 }
 
-.bottom-nav div {
+.bottom-nav button {
+  border: none;
+  background: transparent;
+  font: inherit;
   text-align: center;
   padding: 12px 6px;
+  color: inherit;
+  cursor: pointer;
 }
 
 .bottom-nav .active {
